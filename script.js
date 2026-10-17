@@ -103,4 +103,7 @@ function displayMatrix() {
     result.prepend(heading);
 
     console.log(matrix);
+
+    document.getElementById("bab").hidden = false;
+    document.getElementById("dp").hidden = false;
 }
