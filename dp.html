@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dynamic Programming TSP</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <b>TSP Visualization</b>
+    <a href="index.html">Branch &amp; Bound</a>
+    <a href="dp.html">Dynamic Programming</a>
+    <a href="compare.html">Comparison</a>
+  </div>
+  <div class="page">
+<h2>Traveling Salesman Problem: Dynamic Programming</h2>
+<div class="box">
+  <label class="switch">
+    <span>Predefined input</span>
+    <input type="checkbox" id="modeSwitch" onchange="showMatrix()">
+    <span class="slider"></span>
+    <span>User-defined input</span>
+  </label>
+  <div id="cityRow" style="display:none">Number of cities: <select id="cityCount" onchange="showMatrix()"></select></div>
+  <div id="matrixBox"></div>
+  <button onclick="startRun()">&#9654; Start</button>
+  <button onclick="stopSteps()">&#9208; Pause</button>
+  <button onclick="playSteps()">Resume</button>
+  <button onclick="prevStep()">&#9664; Previous</button>
+  <button onclick="nextStep()">Next &#9654;</button>
+  <button onclick="resetSteps()">Reset</button>
+  Speed: <input type="range" id="speed" min="1" max="100" value="60" oninput="if(timer){playSteps()}">
+  <b id="stepInfo"></b>
+</div>
+
+<div class="row">
+  <div class="box">
+    <h3>City graph</h3>
+    <canvas id="graphCanvas" width="380" height="380"></canvas>
+    <p class="legend"><span style="background:#4299e1"></span>City j being calculated
+      <span style="background:#48bb78"></span>Cities in subset S
+      <span style="background:#a0aec0"></span>Not in S
+      <span style="background:#ecc94b"></span>Best tour</p>
+    <button onclick="sendSalesman()">&#128666; Send the salesman on the best route</button>
+    <p id="salesmanInfo"></p>
+  </div>
+  <div class="box">
+    <h3>DP table C(S, j) &nbsp; <span id="round"></span></h3>
+    <div class="tablebox" id="tableBox"></div>
+    <p class="legend"><span style="background:#4299e1"></span>Cell being calculated
+      <span style="background:#fefcbf"></span>Candidates compared
+      <span style="background:#9ae6b4"></span>Done
+      <span style="background:#e2e8f0"></span>Not yet computed</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="box">
+    <h3>What is happening now?</h3>
+    <p id="explain" class="explain">Press Start.</p>
+    <div id="result" class="result"></div>
+  </div>
+  <div class="box">
+    <h3>Step log</h3>
+    <div id="log" class="log"></div>
+  </div>
+  <div class="box">
+    <h3>Resource usage (live)</h3>
+    <canvas id="barCanvas" width="360" height="220"></canvas>
+    <p id="resources"></p>
+  </div>
+</div>
+
+<div class="box text">
+  <h3>Explanation</h3>
+  <p><b>Idea:</b> C(S, j) = the shortest path that starts at city 1, visits every city of the subset S exactly once and ends at city j.</p>
+  <p><b>Formula:</b> C(S, j) = min { C(S - {j}, i) + d(i, j) } for every i in S, i not j. We try every city i as the "previous" city and keep the smallest.</p>
+  <p><b>Rounds:</b> we solve subsets of size s = 2, 3, ... n. Smaller subsets are solved first and their answers are reused. This reuse is called <i>overlapping subproblems</i>.</p>
+  <p><b>Final answer:</b> min over j of C({1..n}, j) + d(j, 1). The tour is found by going backwards through the table.</p>
+  <p><b>Complexity:</b> there are 2<sup>n-1</sup> subsets, n cities, and n choices of i, so Time = O(n&sup2; &middot; 2<sup>n</sup>) and Space = O(n &middot; 2<sup>n</sup>) for the table.</p>
+</div>
+</div>
+  <script src="js/common.js"></script>
+  <script src="js/dp_algorithm.js"></script>
+  <script src="js/dp.js"></script>
+</body>
+</html>

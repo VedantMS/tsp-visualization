@@ -1,0 +1,32 @@
+body { font-family: Arial, sans-serif; margin: 0; background: #edf2f7; color: #2d3748; }
+.navbar { background: #2b6cb0; padding: 12px 20px; }
+.navbar b { color: white; margin-right: 30px; }
+.navbar a { color: white; margin-right: 20px; text-decoration: none; }
+.navbar a:hover { text-decoration: underline; }
+.page { padding: 15px 20px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; }
+.box { background: white; border-radius: 6px; padding: 12px; margin-bottom: 12px; box-shadow: 0 1px 3px #0002; }
+.text p { line-height: 1.5; }
+button { background: #2b6cb0; color: white; border: 0; padding: 7px 12px; border-radius: 4px; cursor: pointer; margin: 2px; }
+button:hover { background: #2c5282; }
+canvas { border: 1px solid #e2e8f0; max-width: 100%; }
+table.matrix, table.dp { border-collapse: collapse; margin: 8px 0; }
+.matrix td, .matrix th, .dp td, .dp th { border: 1px solid #cbd5e0; padding: 4px 8px; text-align: center; font-size: 13px; }
+.matrix input { width: 45px; }
+.dp td { background: #e2e8f0; min-width: 40px; }
+.dp td.done { background: #9ae6b4; }
+.dp td.cand { background: #fefcbf; }
+.dp td.now { background: #4299e1; color: white; font-weight: bold; }
+.dp td.na { background: #f7fafc; color: #a0aec0; }
+.tablebox { max-height: 340px; overflow: auto; position: relative; max-width: 560px; }
+.explain { background: #ebf8ff; padding: 10px; border-left: 4px solid #4299e1; min-height: 40px; }
+.log { height: 300px; width: 330px; overflow: auto; font-size: 12px; background: #f7fafc; padding: 6px; }
+.log p { margin: 0 0 5px 0; border-bottom: 1px solid #e2e8f0; }
+.result { background: #f0fff4; border: 1px solid #48bb78; padding: 8px; margin-top: 8px; }
+.legend span { display: inline-block; width: 12px; height: 12px; margin: 0 4px 0 12px; border: 1px solid #718096; }
+.switch { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.switch input { display: none; }
+.slider { width: 46px; height: 24px; background: #a0aec0; border-radius: 12px; position: relative; cursor: pointer; }
+.slider::before { content: ""; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: white; border-radius: 50%; }
+.switch input:checked + .slider { background: #2b6cb0; }
+.switch input:checked + .slider::before { left: 25px; }
