@@ -1,9 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Graph Matrix Input</title>
 
     <link rel = "stylesheet" href = "style.css">
@@ -16,15 +14,16 @@
         <h1>Graph Adjacency Matrix</h1>
 
         <label for="n"><b>Enter number of vertices (n):</b></label>
+        
         <br>
-        <input type="number" id="n" min="1" max="30"
-               placeholder="Enter n">
+        
+        <input type="number" id="n" min="1" max="30" placeholder="Enter n">
+        
         <button onclick="createMatrix()">Create Matrix</button>
 
         <div id="matrixInputs"></div>
 
-        <button id="submitBtn" onclick="displayMatrix()"
-                style="display:none">
+        <button id="submitBtn" onclick="displayMatrix()" style="display:none">
             Submit Matrix
         </button>
 
