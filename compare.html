@@ -1,51 +1,85 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Comparison</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <div class="navbar">
-    <b>TSP Visualization</b>
-    <a href="index.html">Branch &amp; Bound</a>
-    <a href="dp.html">Dynamic Programming</a>
-    <a href="compare.html">Comparison</a>
-  </div>
-  <div class="page">
-<h2>Comparison: Branch and Bound vs Dynamic Programming</h2>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="box">
-  <table class="matrix">
-    <tr><th></th><th>Time complexity</th><th>Space complexity</th></tr>
-    <tr><th>Branch and Bound (LCBB)</th><td>O(n!) worst case<br>(usually far less because of pruning)</td><td>O(n&sup2;) per node,<br>up to n! nodes in the worst case</td></tr>
-    <tr><th>Dynamic Programming</th><td>O(n&sup2; &middot; 2<sup>n</sup>)</td><td>O(n &middot; 2<sup>n</sup>)</td></tr>
-  </table>
-  <p>n = number of cities. n! grows faster than 2<sup>n</sup>, so DP is faster in the worst case. DP always fills the whole table, while B&amp;B can be very fast or very slow depending on the input.</p>
-</div>
+        <title> Comparison </title>
 
-<div class="box">
-  Number of cities n = <b id="nValue">10</b>
-  <input type="range" id="nSlider" min="2" max="20" value="10" style="width:300px" oninput="update()">
-  &nbsp; <label><input type="checkbox" id="logScale" checked onchange="update()"> Log scale (keeps big numbers readable)</label>
-</div>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    
+    <body>
+        <div class="navbar">
+            <b> TSP Visualization </b>
+            <a href="index.html"> Branch &amp; Bound </a>
+            <a href="dp.html"> Dynamic Programming </a>
+            <a href="compare.html"> Comparison </a>
+        </div>
 
-<div class="row">
-  <div class="box"><h3>Time growth (number of operations)</h3><canvas id="timeCanvas" width="520" height="320"></canvas></div>
-  <div class="box"><h3>Space growth (memory units)</h3><canvas id="spaceCanvas" width="520" height="320"></canvas></div>
-</div>
+        <div class="page">
+            <h2> Comparison: Branch and Bound vs Dynamic Programming </h2>
 
-<div class="box"><h3>Values for the selected n</h3><div id="valueTable"></div></div>
+            <div class="box">
+                <table class="matrix">
+                    <tr>
+                        <th></th>
+                        <th> Time complexity </th>
+                        <th> Space complexity </th>
+                    </tr>
+                    
+                    <tr>
+                        <th> Branch and Bound (LCBB) </th>
+                        <td> O(n!) worst case<br>(usually far less because of pruning) </td>
+                        <td> O(n&sup2;) per node,<br>up to n! nodes in the worst case </td>
+                    </tr>
 
-<div class="box text">
-  <h3>Resource constraints</h3>
-  <p><b>Why DP runs out of memory:</b> the table has about n &middot; 2<sup>n</sup> cells. For n = 20 that is more than 20 million cells, and every extra city doubles the memory.</p>
-  <p><b>Why B&amp;B is unpredictable:</b> good pruning cuts almost all branches, but a bad input may force it to explore close to n! nodes, and the live-node queue also uses memory.</p>
-  <p><b>When to use which:</b> DP for small and medium n when we need a guaranteed running time; B&amp;B when pruning works well on the data, because it can solve bigger cases.</p>
-</div>
-</div>
-  <script src="js/common.js"></script>
-  <script src="js/compare.js"></script>
-</body>
-</html>
+                    <tr>
+                        <th> Dynamic Programming </th>
+                        <td> O(n&sup2; &middot; 2<sup>n</sup>)</td><td>O(n &middot; 2<sup>n</sup>) </td>
+                    </tr>
+                </table>
+
+                <p> n = number of cities. n! grows faster than 2<sup>n</sup>, so DP is faster in the worst case. DP always fills the whole table, while B&amp;B can be very fast or very slow depending on the input. </p>
+            </div>
+
+            <div class="box">
+                Number of cities n = <b id="nValue"> 10 </b>
+
+                <input type="range" id="nSlider" min="2" max="20" value="10" style="width:300px" oninput="update()">
+
+                &nbsp; <label><input type="checkbox" id="logScale" checked onchange="update()"> Log scale (keeps big numbers readable) </label>
+            </div>
+
+            <div class="row">
+                <div class="box">
+                    <h3> Time growth (number of operations) </h3>
+                    
+                    <canvas id="timeCanvas" width="520" height="320"></canvas>
+                </div>
+
+                <div class="box">
+                    <h3> Space growth (memory units) </h3>
+                    
+                    <canvas id="spaceCanvas" width="520" height="320"></canvas>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3> Values for the selected n </h3>
+                
+                <div id="valueTable"></div>
+            </div>
+
+            <div class="box text">
+                <h3> Resource constraints </h3>
+
+                <p><b> Why DP runs out of memory:</b> the table has about n &middot; 2<sup>n</sup> cells. For n = 20 that is more than 20 million cells, and every extra city doubles the memory. </p>
+                <p><b> Why B&amp;B is unpredictable:</b> good pruning cuts almost all branches, but a bad input may force it to explore close to n! nodes, and the live-node queue also uses memory. </p>
+                <p><b> When to use which:</b> DP for small and medium n when we need a guaranteed running time; B&amp;B when pruning works well on the data, because it can solve bigger cases. </p>
+            </div>
+        </div>
+        
+        <script src="js/common.js"></script>
+        <script src="js/compare.js"></script>
+    </body>
+    </html>
