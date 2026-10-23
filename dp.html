@@ -38,7 +38,9 @@
                 <button onclick="nextStep()"> Next &#9654;</button>
                 <button onclick="resetSteps()"> Reset </button>
         
-                Speed: <input type="range" id="speed" min="1" max="100" value="60" oninput="if(timer){playSteps()}">
+                Speed: <input type="range" id="speed" min="1" max="100" value="60" oninput="if  (timer) {
+                                                                                                    playSteps()
+                                                                                            }">
         
                 <b id="stepInfo"></b>
             </div>

@@ -1,6 +1,6 @@
 // dp_algorithm.js - TSP by dynamic programming
 
-// [3,4] -> "{3,4}"   (an empty list gives "{}")
+// [3,4] -> "{3,4}"
 function subsetText(list) {
     return '{' + list.join(',') + '}';
 }
@@ -19,7 +19,6 @@ function removeCity(list, city) {
 }
 
 // all subsets of {2,...,n} that have exactly s cities.
-// Every number "mask" from 0 to 2^(n-1)-1 is one subset: binary digit b is 1 -> city b+2 is inside.
 function getSubsets(s, n) {
     var subsets = [];
 
