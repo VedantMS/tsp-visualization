@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title> Branch and Bound TSP </title>
+
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <div class="navbar">
+            <b>TSP Visualization</b>
+            
+            <a href="index.html">Branch &amp; Bound</a>
+            <a href="dp.html">Dynamic Programming</a>
+            <a href="compare.html">Comparison</a>
+        </div>
+        
+        <div class="page">
+            <h2>Traveling Salesman Problem: Branch and Bound (LCBB)</h2>
+        
+            <div class="box">
+                <label class="switch">
+                    <span> Predefined input </span>
+                    <input type="checkbox" id="modeSwitch" onchange="showMatrix()">
+                    <span class="slider"></span>
+                    <span> User-defined input </span>
+                </label>
+        
+                <div id="cityRow" style="display:none"> Number of cities: <select id="cityCount" onchange="showMatrix()"></select></div>
+                
+                <div id="matrixBox"></div>
+        
+                <button onclick="startRun()">&#9654; Start </button>
+                <button onclick="stopSteps()">&#9208; Pause </button>
+                <button onclick="playSteps()"> Resume </button>
+                <button onclick="prevStep()">&#9664; Previous </button>
+                <button onclick="nextStep()"> Next &#9654;</button>
+                <button onclick="resetSteps()"> Reset </button>
+                
+                Speed: <input type="range" id="speed" min="1" max="100" value="60" oninput="if(timer){playSteps()}">
+                <b id="stepInfo"></b>
+            </div>
+
+            <div class="row">
+                <div class="box">
+                    <h3> City graph </h3>
+                    
+                    <canvas id="graphCanvas" width="380" height="380"></canvas>
+            
+                    <p class="legend">
+                        <span style="background:#4299e1"></span> Current city
+                        <span style="background:#48bb78"></span> Visited
+                        <span style="background:#a0aec0"></span> Unvisited
+                        <span style="background:#ecc94b"></span> Best tour
+                    </p>
+                        
+                    <button onclick="sendSalesman()">&#128666; Send the salesman on the best route </button>
+            
+                    <p id="salesmanInfo"></p>
+                </div>
+        
+                <div class="box">
+                    <h3> State-space tree (each node shows the city and its cost) </h3>
+            
+                    <canvas id="treeCanvas" width="560" height="380"></canvas>
+            
+                    <p class="legend">
+                        <span style="background:#ffe066"></span> Live
+                        <span style="background:#90cdf4"></span> Expanded
+                        <span style="background:#fc8181"></span> Pruned
+                        <span style="background:#f59e0b"></span> Best tour found
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="box">
+                    <h3> What is happening now? </h3>
+                
+                    <p id="explain" class="explain"> Press Start. </p>
+                    
+                    <h3> Current reduced matrix </h3>
+                
+                    <div id="matrixView"></div>
+                </div>
+
+                <div class="box">
+                    <h3> Step log </h3>
+
+                    <div id="log" class="log"></div>
+                </div>
+            
+                <div class="box">
+                    <h3> Resource usage (live) </h3>
+                
+                    <canvas id="barCanvas" width="360" height="220"></canvas>
+                
+                    <p id="resources"></p>
+
+                    <div id="result" class="result"></div>
+                </div>
+            </div>
+
+            <div class="box text">
+                <h3> Explanation </h3>
+
+                <p><b> TSP: </b> a salesman must visit every city exactly once and return to the start city with the smallest total distance. </p>
+                <p><b> LCBB (Least Cost Branch and Bound):</b> we build a tree of partial paths. Every node has a <i>cost</i> (a lower bound: the best total it could ever reach). We always expand the live node with the least cost. </p>
+                <p><b> Reduction: </b> subtract the smallest number of each row from that row, then the smallest of each column from that column. The sum of all subtracted numbers is added to the cost. </p>
+                <p><b> Child cost </b> = parent cost + d(i,j) + reduction of the new matrix (row i and column j are set to infinity). </p>
+                <p><b> Pruning: </b> if a node's cost is not smaller than the best complete tour found so far, we cut that branch. This saves a lot of time. </p>
+                <p><b> Complexity: </b> Time worst case O(n!), usually much less because of pruning. Space: every node stores an n x n matrix, so O(n&sup2;) per node. </p>
+            </div>
+        </div>
+
+        <script src="js/common.js"></script>
+        <script src="js/bb_algorithm.js"></script>
+        <script src="js/branch_bound.js"></script>
+    </body>
+</html>
